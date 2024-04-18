@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import Webcam from 'react-webcam';
 import { useState, useEffect } from 'react';
+import FeedbackPage from './FeebackPage';
 
 const VideoCapture = ({ documentUrl }) => {
   const webcamRef = useRef(null);
@@ -9,6 +10,7 @@ const VideoCapture = ({ documentUrl }) => {
   const [videoData, setVideoData] = useState(null);
   const [videoURL, setVideoURL] = useState('');
   const [backgroundImage, setBackgroundImage] = useState('images/normal.jpg');
+  const [redirectToFeedback, setRedirectToFeedback] = useState(false);
 
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -30,6 +32,16 @@ const VideoCapture = ({ documentUrl }) => {
           break;
         case 's':
           setBackgroundImage('/images/sleepy.jpg');
+          break;
+        case 'ArrowUp':
+          if (documentUrl) {
+            window.scrollBy(0, -100); // Scroll up by 100 pixels
+          }
+          break;
+        case 'ArrowDown':
+          if (documentUrl) {
+            window.scrollBy(0, 100); // Scroll down by 100 pixels
+          }
           break;
         default:
           break;
@@ -75,7 +87,7 @@ const VideoCapture = ({ documentUrl }) => {
         if (!response.ok) throw new Error('Upload failed');
         const result = await response.json();
         console.log(result);
-        alert('Upload successful');
+        setRedirectToFeedback(true);
       } catch (error) {
         console.error('Upload failed:', error);
         alert('Upload failed');
@@ -83,6 +95,9 @@ const VideoCapture = ({ documentUrl }) => {
     }
   };
   
+  if (redirectToFeedback) {
+    return <FeedbackPage />;
+  }
 
   return (
     // <div style={{ 
@@ -108,16 +123,9 @@ const VideoCapture = ({ documentUrl }) => {
     //   {/* {videoURL && <video src={videoURL} controls />} */}
     // </div>
 
-    <div style={{ display: 'flex', height: '100vh', width: '100%' }}>
-      <div style={{ flex: 1, position: 'relative', backgroundImage: `url(images/normal.jpg)`, backgroundSize: 'cover' }}>
-        <Webcam audio={false} ref={webcamRef} style={{
-            position: 'absolute',
-            left: '10px',
-            bottom: '10px',
-            width: '160px',
-            height: '120px'
-        }}/>
-
+    <div style={{ display: 'flex', height: '100vh', flexDirection: 'row' }}>
+      <div style={{ flex: documentUrl ? 6 : 10, backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
+        <Webcam audio={true} ref={webcamRef} style={{ position: 'absolute', left: '10px', bottom: '10px', width: '160px', height: '120px' }} />
         {recording ? (
           <button onClick={handleStopCapture}>Stop Capture</button>
           ) : (
@@ -126,11 +134,13 @@ const VideoCapture = ({ documentUrl }) => {
 
         <button onClick={handleUpload} disabled={!videoData}>Upload Video</button>
           {/* {videoURL && <video src={videoURL} controls />} */}
-      </div>
       
-      <div style={{ flex: 1, overflowY: 'auto' }}>
-        {documentUrl && <iframe src={documentUrl} style={{ width: '100%', height: '100%' }} />}
       </div>
+      {documentUrl && (
+        <div style={{ flex: 4, overflowY: 'auto' }}>
+          <iframe src={documentUrl} style={{ width: '100%', height: '100%' }} />
+        </div>
+      )}
     </div>
   );
 };
