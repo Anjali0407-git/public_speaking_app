@@ -18,11 +18,10 @@ function HomePage() {
       <Link to="/record-session" className="App-link">
         Record a Session
       </Link>
-      <div>
-        {videos.map(video => (
-          <video key={video.path} src={`/uploads/${video.path}`} controls />
-        ))}
-      </div>
+      <Link to="/videos" className="App-link">
+        My Recordings
+      </Link>
+      
     </div>
   );
 }

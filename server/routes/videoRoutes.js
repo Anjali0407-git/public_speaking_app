@@ -14,6 +14,8 @@ const express = require('express');
 const multer = require('multer');
 const router = express.Router();
 const { Video } = require("../models/videoModel");
+const fs = require('fs');
+const path = require('path');
 
 // Configure multer for video storage
 const storage = multer.diskStorage({
@@ -34,6 +36,25 @@ router.post('/upload', upload.single('video'), (req, res) => {
     path: req.file.path
   });
   video.save().then((doc) => res.json(doc));
+});
+
+// Listing videos directly from the file system
+router.get('/list', (req, res) => {
+  const uploadsDirectory = path.join(__dirname, '../uploads');
+
+  fs.readdir(uploadsDirectory, (err, files) => {
+    if (err) {
+      console.log("Failed to list contents of directory:", err);
+      return res.status(500).send('Unable to list video files');
+    }
+
+    const videos = files.map(file => ({
+      title: file,
+      path: file
+    }));
+    console.log('videos', videos);
+    res.json(videos);
+  });
 });
 
 module.exports = router;
