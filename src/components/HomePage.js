@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Button, Typography, Container } from '@mui/material';
 
 function HomePage() {
   const [videos, setVideos] = useState([]);
@@ -13,16 +13,19 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="App-header">
-      <h1>Welcome to the Public Speaking Practice App</h1>
-      <Link to="/record-session" className="App-link">
-        Record a Session
-      </Link>
-      <Link to="/videos" className="App-link">
-        My Recordings
-      </Link>
-      
-    </div>
+    <Container maxWidth="sm">
+      <div style={{ textAlign: 'center', marginTop: '50px' }}>
+        <Typography variant="h4" gutterBottom>
+          Welcome to the Public Speaking Practice App
+        </Typography>
+        <Button variant="contained" component={Link} to="/record-session" style={{ margin: '10px' }}>
+          Record a Session
+        </Button>
+        <Button variant="outlined" component={Link} to="/videos" style={{ margin: '10px' }}>
+          My Recordings
+        </Button>
+      </div>
+    </Container>
   );
 }
 

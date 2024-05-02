@@ -1,4 +1,3 @@
-// import React from 'react';
 import { Typography, Box, Rating, Paper, Grid } from '@mui/material';
 import { Doughnut, Bar } from 'react-chartjs-2';
 import 'chart.js/auto';

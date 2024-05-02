@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import Webcam from 'react-webcam';
 import { useState, useEffect } from 'react';
-import FeedbackPage from './FeebackPage';
+import FeedbackPage from './FeedbackPage';
 
 const VideoCapture = ({ documentUrl }) => {
   const webcamRef = useRef(null);
@@ -100,32 +100,9 @@ const VideoCapture = ({ documentUrl }) => {
   }
 
   return (
-    // <div style={{ 
-    //   position: 'relative',
-    //   width: '100%', 
-    //   height: '100vh',
-    //   backgroundImage: `url(${backgroundImage})`,
-    //   backgroundSize: 'cover'
-    // }}>
-    //   <Webcam audio={false} ref={webcamRef} style={{
-    //       position: 'absolute',
-    //       left: '10px',
-    //       bottom: '10px',
-    //       width: '160px',
-    //       height: '120px'
-    //     }}/>
-    //   {recording ? (
-    //     <button onClick={handleStopCapture}>Stop Capture</button>
-    //   ) : (
-    //     <button onClick={handleStartCapture}>Start Capture</button>
-    //   )}
-    //   <button onClick={handleUpload} disabled={!videoData}>Upload Video</button>
-    //   {/* {videoURL && <video src={videoURL} controls />} */}
-    // </div>
-
     <div style={{ display: 'flex', height: '100vh', flexDirection: 'row' }}>
       <div style={{ flex: documentUrl ? 6 : 10, backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
-        <Webcam audio={true} ref={webcamRef} style={{ position: 'absolute', left: '10px', bottom: '10px', width: '160px', height: '120px' }} />
+        <Webcam audio={true} ref={webcamRef} style={{ position: 'absolute', left: '10px', bottom: '10px', width: '200px', height: '160px' }} />
         {recording ? (
           <button onClick={handleStopCapture}>Stop Capture</button>
           ) : (

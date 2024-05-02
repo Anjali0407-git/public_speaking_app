@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import RecordSessionPage from './components/RecordSessionPage';
 import HomePage from './components/HomePage';
 import VideosPage from './components/VideosPage';
+import FeedbackPage from './components/FeedbackPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route exact path="/" element={<HomePage />} />
           <Route path="/record-session" element={<RecordSessionPage />} />
           <Route path="/videos" element={<VideosPage />} />
+          <Route path="/feedback" element={<FeedbackPage />} />
         </Routes>
       </div>
     </Router>

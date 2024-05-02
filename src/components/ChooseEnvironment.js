@@ -1,13 +1,21 @@
 import React from 'react';
+import { Button, Card, CardContent, Typography } from '@material-ui/core';
 
 function ChooseEnvironment({ nextStep }) {
   return (
-    <div>
-      <h2>Choose an Environment</h2>
-      {/* Example of environment selection - implement according to your needs */}
-      <button onClick={nextStep}>Classroom</button>
-      <button onClick={nextStep}>Auditorium</button>
-    </div>
+    <Card>
+      <CardContent>
+        <Typography variant="h5" component="h2">
+          Choose an Environment
+        </Typography>
+        <Button variant="contained" color="primary" onClick={nextStep} style={{ margin: 8 }}>
+          Classroom
+        </Button>
+        <Button variant="contained" color="primary" onClick={nextStep} style={{ margin: 8 }}>
+          Auditorium
+        </Button>
+      </CardContent>
+    </Card>
   );
 }
 

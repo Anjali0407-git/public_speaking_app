@@ -1,13 +1,21 @@
 import React from 'react';
+import { Button, Card, CardContent, Typography } from '@material-ui/core';
 
 function ChooseAudience({ nextStep }) {
   return (
-    <div>
-      <h2>Choose Audience Type</h2>
-      {/* Example of audience type selection - implement according to your needs */}
-      <button onClick={nextStep}>Students</button>
-      <button onClick={nextStep}>Professionals</button>
-    </div>
+    <Card>
+      <CardContent>
+        <Typography variant="h5" component="h2">
+          Choose Audience Type
+        </Typography>
+        <Button variant="contained" color="primary" onClick={nextStep} style={{ margin: 8 }}>
+          Students
+        </Button>
+        <Button variant="contained" color="primary" onClick={nextStep} style={{ margin: 8 }}>
+          Professionals
+        </Button>
+      </CardContent>
+    </Card>
   );
 }
 
